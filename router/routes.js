@@ -11,7 +11,7 @@ router.post('/login',UserController.postLogin)
 router.use(authenticationUser)
 router.get('/movies',MovieController.getLogin)
 router.get('/bookmark',BookmarkController.getAll)
-router.post('/bookmark',BookmarkController.postAdd)
+router.post('/bookmark/:id',BookmarkController.postAdd)
 
 
 module.exports = router

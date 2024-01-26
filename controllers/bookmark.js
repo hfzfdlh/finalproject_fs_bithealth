@@ -4,7 +4,7 @@ const { Bookmark,Movie } = require('../models')
 class BookmarkController{
     static async postAdd(req,res,next){
         try {
-            const {MovieId} = req.body
+            const MovieId = req.params.id
             const UserId = req.user.id
             const addBookmark = await Bookmark.create({UserId,MovieId})
             const getMovie = await Movie.findOne({where:{id:MovieId}})
@@ -23,7 +23,7 @@ class BookmarkController{
 
     static async getAll(req,res,next){
         try {
-            const getData = await Bookmark.findAll({include:Movie})
+            const getData = await Bookmark.findAll({where:{UserId:req.user.id}},{include:Movie})
 
             res.status(200).json({getData})
         } catch (error) {
